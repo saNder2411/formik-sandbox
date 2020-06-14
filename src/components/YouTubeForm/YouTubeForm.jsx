@@ -6,11 +6,15 @@ import {ErrorText} from '../ErrorText';
 
 
 const initialValues = {
-  name: ``,
+  name: `Name`,
   email: ``,
   channel: ``,
   comments: ``,
   address: ``,
+  social: {
+    facebook: ``,
+    twitter: ``,
+  },
 };
 
 const onSubmit = (values) => console.log(`form submit`, values);
@@ -89,6 +93,24 @@ const YouTubeForm = () => {
           </div>
 
           <div className="form-control">
+            <label htmlFor="facebook">Facebook profile</label>
+            <Field
+              type="text"
+              id="facebook"
+              name="social.facebook"
+              placeholder="Link on your profile in facebook"/>
+          </div>
+
+          <div className="form-control">
+            <label htmlFor="twitter">Twitter profile</label>
+            <Field
+              type="text"
+              id="twitter"
+              name="social.twitter"
+              placeholder="Link on your profile in twitter"/>
+          </div>
+
+          <div className="form-control">
             <label htmlFor="comments">Comments</label>
             <Field
               as="textarea"
@@ -106,4 +128,4 @@ const YouTubeForm = () => {
   )
 }
 
-export default YouTubeForm
+export default YouTubeForm;
