@@ -15,6 +15,7 @@ const initialValues = {
     facebook: ``,
     twitter: ``,
   },
+  phoneNumbers: [``, ``],
 };
 
 const onSubmit = (values) => console.log(`form submit`, values);
@@ -109,6 +110,25 @@ const YouTubeForm = () => {
               name="social.twitter"
               placeholder="Link on your profile in twitter"/>
           </div>
+
+          <div className="form-control">
+            <label htmlFor="primaryPh">Home phone number</label>
+            <Field
+              type="text"
+              id="primaryPh"
+              name="phoneNumbers[0]"
+              placeholder="Your phone number"/>
+          </div>
+
+          <div className="form-control">
+            <label htmlFor="secondaryPh">Mobile phone number</label>
+            <Field
+              type="text"
+              id="secondaryPh"
+              name="phoneNumbers[1]"
+              placeholder="Your phone number"/>
+          </div>
+
 
           <div className="form-control">
             <label htmlFor="comments">Comments</label>
