@@ -25,11 +25,20 @@ textarea {
   border-radius: 4px;
 }
 
+.form-container {
+  padding: 20px;
+  border: 1px solid gray;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
 .form-control {
   margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .error {
+  position: absolute;
   padding: 5px 2px;
   color: red;
   font-size: small;

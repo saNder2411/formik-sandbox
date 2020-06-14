@@ -2,9 +2,9 @@ import React from 'react';
 import { useFormik } from 'formik';
 
 const initialValues = {
-  name: `Name`,
-  email: `Email`,
-  channel: `Channel Name`,
+  name: ``,
+  email: ``,
+  channel: ``,
 };
 
 const onSubmit = (values) => console.log(values);
@@ -37,10 +37,10 @@ const YouTubeForm = () => {
     validate,
   });
 
-  console.log(`Formik errors` , formik.errors);
+  console.log(`visited fields` , formik.touched);
 
   return (
-    <div>
+    <div className="form-container">
       <form onSubmit={formik.handleSubmit}>
         <div className="form-control">
           <label htmlFor="name">Name</label>
@@ -48,10 +48,12 @@ const YouTubeForm = () => {
             type="text"
             id="name"
             name="name"
+            placeholder="Name"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.name} />
 
-          {formik.errors.name ? (
+          {formik.touched.name && formik.errors.name ? (
             <div className="error">{formik.errors.name}</div>
           ) : null}
         </div>
@@ -62,10 +64,12 @@ const YouTubeForm = () => {
             type="email"
             id="email"
             name="email"
+            placeholder="Email"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.email} />
 
-          {formik.errors.email ? (
+          {formik.touched.email && formik.errors.email ? (
             <div className="error">{formik.errors.email}</div>
           ) : null}
         </div>
@@ -76,10 +80,12 @@ const YouTubeForm = () => {
             type="text"
             id="channel"
             name="channel"
+            placeholder="Channel Name"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.channel} />
 
-          {formik.errors.channel ? (
+          {formik.touched.channel && formik.errors.channel ? (
             <div className="error">{formik.errors.channel}</div>
           ) : null}
         </div>
