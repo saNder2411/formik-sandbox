@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik';
 import * as Yup from 'yup';
 
 import {ErrorText} from '../ErrorText';
@@ -26,8 +26,18 @@ const validationSchema = Yup.object({
   email: Yup.string().email(`Invalid email format!`).required(`Required field!`),
   channel: Yup.string().required(`Required field!`),
   comments: Yup.string().min(20, `Length mast be > 20 symbol`),
-  address: Yup.string().required(`Required field!`),
 });
+
+// Another one validate methods
+const validateAddress = (values) => {
+  let error = null;
+
+  if (!values) {
+    error = `Required address field!`;
+  }
+
+  return error;
+};
 
 const YouTubeForm = () => {
 
@@ -36,7 +46,8 @@ const YouTubeForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={onSubmit}>
+        onSubmit={onSubmit}
+        validateOnChange={false}>
         <Form>
           <div className="form-control">
             <label htmlFor="name">Name</label>
@@ -62,8 +73,9 @@ const YouTubeForm = () => {
 
           <div className="form-control">
             <label htmlFor="address">Address</label>
-            <Field
-              name="address">
+            <FastField
+              name="address"
+              validate={validateAddress}>
               {({field, meta}) => (
                   <>
                     <input
@@ -76,7 +88,7 @@ const YouTubeForm = () => {
                       ) : null}
                   </>
                 )}
-            </Field>
+            </FastField>
           </div>
 
           <div className="form-control">
@@ -134,10 +146,10 @@ const YouTubeForm = () => {
             <label>List of phone numbers</label>
             <FieldArray name="phNumbers">
               {
-                ({push, remove, form: {values: {phNumbers}}}) => (
+                ({push, remove, form}) => (
                   <div>
                     {
-                      phNumbers.map((item, indx) => (
+                      form.values.phNumbers.map((item, indx) => (
                         <div key={Math.random() * 1e9}>
                           <Field type="text" name={`phNumbers[${indx}]`} />
                           <button type="button" onClick={() => push()}>+</button>
