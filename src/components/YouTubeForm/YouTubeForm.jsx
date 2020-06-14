@@ -38,9 +38,7 @@ const YouTubeForm = () => {
               name="name"
               placeholder="Name"/>
 
-            <div className="error">
-              <ErrorMessage name="name" />
-            </div>
+            <ErrorMessage name="name" component="div" className="error" />
           </div>
 
           <div className="form-control">
@@ -51,19 +49,15 @@ const YouTubeForm = () => {
               name="email"
               placeholder="Email"/>
 
-            <div className="error">
-              <ErrorMessage name="email" />
-            </div>
+            <ErrorMessage name="email" component="div" className="error" />
           </div>
 
           <div className="form-control">
             <label htmlFor="address">Address</label>
             <Field
               name="address">
-              {({field, meta}) => {
-                console.log(field);
-                return (
-                  <div>
+              {({field, meta}) => (
+                  <>
                     <input
                       type="text"
                       id="address"
@@ -72,14 +66,11 @@ const YouTubeForm = () => {
                       {meta.touched && meta.error ? (
                         <div className="error">{meta.error}</div>
                       ) : null}
-                  </div>
-                );
-              }}
+                  </>
+                )}
             </Field>
 
-            <div className="error">
-              <ErrorMessage name="address" />
-            </div>
+            <ErrorMessage name="address" component="div" className="error" />
           </div>
 
           <div className="form-control">
@@ -90,9 +81,7 @@ const YouTubeForm = () => {
               name="channel"
               placeholder="Channel Name"/>
 
-            <div className="error">
-              <ErrorMessage name="channel" />
-            </div>
+            <ErrorMessage name="channel" component="div" className="error" />
           </div>
 
           <div className="form-control">
@@ -103,9 +92,7 @@ const YouTubeForm = () => {
               name="comments"
               placeholder="Your comments"/>
 
-            <div className="error">
-              <ErrorMessage name="comments" />
-            </div>
+            <ErrorMessage name="comments" component="div" className="error" />
           </div>
 
           <button type="submit">Submit</button>
