@@ -26,7 +26,8 @@ textarea {
 }
 
 button {
-  margin: 5px 0px;
+  display: block;
+  margin: 10px 0px;
   margin-right: 5px;
 }
 
