@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import YouTubeForm from './components/YouTubeForm';
+import {YouTubeForm} from '../YouTubeform';
 
 const App = () => {
 
