@@ -19,7 +19,13 @@ const initialValues = {
   phNumbers: [``],
 };
 
-const onSubmit = (values) => console.log(`form submit`, values);
+const onSubmit = (values, onSubmitProps) => {
+  console.log(`form submit`, values);
+  console.log(`onSubmitProps`, onSubmitProps);
+  onSubmitProps.setSubmitting(false);
+  onSubmitProps.resetForm();
+  onSubmitProps.validateForm();
+};
 
 const validationSchema = Yup.object({
   name: Yup.string().required(`Required field!`),
@@ -47,10 +53,13 @@ const YouTubeForm = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        validateOnChange={false}>
+        validateOnChange={false}
+        validateOnMount
+        >
         {
-          ({validateForm, validateField, resetForm, setTouched, setFieldTouched}) => (
+          ({validateForm, validateField, resetForm, setTouched, setFieldTouched, isValid, isSubmitting}) => (
             <Form>
+            {console.log(isSubmitting)}
               <div className="form-control">
                 <label htmlFor="name">Name</label>
                 <Field
@@ -165,7 +174,6 @@ const YouTubeForm = () => {
                 </FieldArray>
               </div>
 
-
               <div className="form-control">
                 <label htmlFor="comments">Comments</label>
                 <Field
@@ -214,7 +222,7 @@ const YouTubeForm = () => {
                 Validate All
               </button>
               <button type="reset" onClick={() => resetForm()}>Reset All Field</button>
-              <button type="submit">Submit</button>
+              <button type="submit" disabled={!isValid || isSubmitting}>Submit</button>
             </Form>
           )
         }
