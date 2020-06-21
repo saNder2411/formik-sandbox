@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik';
 import * as Yup from 'yup';
 
@@ -18,6 +18,24 @@ const initialValues = {
   phoneNumbers: [``, ``],
   phNumbers: [``],
 };
+
+
+//Data maybe from API
+const mockSavedValues = {
+  name: `Name`,
+  email: `hi@hi.com`,
+  channel: `Chanel`,
+  comments: `Welcome to YouTube`,
+  address: `222b Baker Street`,
+  social: {
+    facebook: ``,
+    twitter: ``,
+  },
+  phoneNumbers: [``, ``],
+  phNumbers: [``],
+};
+
+
 
 const onSubmit = (values, onSubmitProps) => {
   console.log(`form submit`, values);
@@ -46,20 +64,21 @@ const validateAddress = (values) => {
 };
 
 const YouTubeForm = () => {
+  const [formValues, setFormValues] = useState(null);
 
   return (
     <div className="form-container">
       <Formik
-        initialValues={initialValues}
+        initialValues={formValues || initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
         validateOnChange={false}
+        enableReinitialize
         validateOnMount
         >
         {
           ({validateForm, validateField, resetForm, setTouched, setFieldTouched, isValid, isSubmitting}) => (
             <Form>
-            {console.log(isSubmitting)}
               <div className="form-control">
                 <label htmlFor="name">Name</label>
                 <Field
@@ -221,6 +240,7 @@ const YouTubeForm = () => {
                 }>
                 Validate All
               </button>
+              <button type="button" onClick={() => setFormValues(mockSavedValues)}>Load save data</button>
               <button type="reset" onClick={() => resetForm()}>Reset All Field</button>
               <button type="submit" disabled={!isValid || isSubmitting}>Submit</button>
             </Form>
